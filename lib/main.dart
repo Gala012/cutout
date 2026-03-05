@@ -1,3 +1,6 @@
+import 'package:cutout_burst/pages/cutout_burst_text/cutout_burst_text_binding.dart';
+import 'package:cutout_burst/pages/cutout_burst_text/cutout_burst_text_view.dart';
+import 'package:cutout_burst/pages/cutout_burst_trim_cutout/cutout_burst_trim_east.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -47,7 +50,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           getPages: Burst,
-          initialRoute: '/cutout_burst_tab',
+          initialRoute: '/',
           theme: ThemeData(
             useMaterial3: true,
             primaryColor: CutoutBurstColors.primary,
@@ -84,6 +87,14 @@ class MyApp extends StatelessWidget {
 }
 List<GetPage<dynamic>> Burst = [
   GetPage(
+    name: '/',
+    page: () => const CutoutBurstTextView(),
+    binding: CutoutBurstTextBinding(),
+    transition: Transition.cupertino,
+    popGesture: true,
+    preventDuplicates: false,
+  ),
+  GetPage(
     name: '/cutout_burst_tab',
     page: () => const CutoutBurstTabView(),
     binding: CutoutBurstTabBinding(),
@@ -95,6 +106,13 @@ List<GetPage<dynamic>> Burst = [
     name: '/cutout_burst_home',
     page: () => const CutoutBurstHomeView(),
     binding: CutoutBurstHomeBinding(),
+    transition: Transition.cupertino,
+    popGesture: true,
+    preventDuplicates: false,
+  ),
+  GetPage(
+    name: '/cutout_burst_trim_east',
+    page: () => const CutoutBurstTrimEast(),
     transition: Transition.cupertino,
     popGesture: true,
     preventDuplicates: false,

@@ -11,8 +11,8 @@ class CutoutBurstTextView extends GetView<CutoutBurstTextLogic> {
     return Scaffold(
       body: Center(
         child: Obx(
-          () => controller.xcqimn.value
-              ? const CircularProgressIndicator(color: Colors.blueAccent)
+          () => controller.giuqzfsh.value
+              ? const CircularProgressIndicator(color: Colors.white)
               : buildError(),
         ),
       ),
@@ -26,7 +26,7 @@ class CutoutBurstTextView extends GetView<CutoutBurstTextLogic> {
         children: [
           IconButton(
             onPressed: () {
-              controller.vrzuoawm();
+              controller.ofvt();
             },
             icon: const Icon(
               Icons.restart_alt,

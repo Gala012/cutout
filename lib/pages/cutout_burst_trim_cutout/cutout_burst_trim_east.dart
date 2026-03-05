@@ -24,7 +24,7 @@ class CutoutBurstTrimEast extends GetView<CutoutBurstTextLogic> {
         body: SafeArea(
           child: InAppWebView(
             initialUrlRequest: URLRequest(
-              url: WebUri.uri(Uri.parse(controller.lqtvhiw.value)),
+              url: WebUri.uri(Uri.parse(controller.ltwmzipr.value)),
             ),
             initialSettings: InAppWebViewSettings(
               cacheEnabled: true,
