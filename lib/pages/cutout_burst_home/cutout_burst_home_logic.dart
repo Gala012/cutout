@@ -6,6 +6,7 @@ import '../../db_cutout_burst/data.dart';
 import '../../db_cutout_burst/db_cutout_burst_entity.dart';
 import '../../utils/index.dart';
 import '../cutout_burst_tab/cutout_burst_tab_logic.dart';
+
 class CutoutBurstHomeLogic extends GetxController {
   final recentWorks = <CutoutHistory>[].obs;
   final isLoading = false.obs;
@@ -14,6 +15,7 @@ class CutoutBurstHomeLogic extends GetxController {
     super.onInit();
     loadRecentWorks();
   }
+
   Future<void> loadRecentWorks() async {
     try {
       isLoading.value = true;
@@ -26,16 +28,19 @@ class CutoutBurstHomeLogic extends GetxController {
       isLoading.value = false;
     }
   }
+
   void onModeTap(String mode) {
     Get.toNamed(
       '/cutout_burst_select_photo',
       arguments: {'mode': mode},
     );
   }
+
   void onSeeAllTap() {
     final tabLogic = Get.find<CutoutBurstTabLogic>();
     tabLogic.onTabChange(1);
   }
+
   Future<void> onRecentWorkTap(CutoutHistory history) async {
     await Get.dialog(
       Dialog(
@@ -54,6 +59,7 @@ class CutoutBurstHomeLogic extends GetxController {
       ),
     );
   }
+
   Future<void> _deleteSingleHistory(CutoutHistory history) async {
     final confirmed = await Get.dialog<bool>(
       AlertDialog(
@@ -81,22 +87,22 @@ class CutoutBurstHomeLogic extends GetxController {
       errorToast('Failed to delete');
     }
   }
+
   Future<void> _deleteHistoryFiles(CutoutHistory history) async {
     try {
       final resultFile = File(history.resultPath);
       if (await resultFile.exists()) {
         await resultFile.delete();
       }
-    } catch (e) {
-    }
+    } catch (e) {}
     try {
       final thumbnailFile = File(history.thumbnailPath);
       if (await thumbnailFile.exists()) {
         await thumbnailFile.delete();
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   }
+
   Future<void> _shareHistory(CutoutHistory history) async {
     try {
       final file = File(history.resultPath);
@@ -110,6 +116,7 @@ class CutoutBurstHomeLogic extends GetxController {
       errorToast('Failed to share');
     }
   }
+
   String getModeDisplayName(String mode) {
     switch (mode) {
       case CutoutMode.trim:
@@ -124,6 +131,7 @@ class CutoutBurstHomeLogic extends GetxController {
         return 'Unknown';
     }
   }
+
   Color getModeColor(String mode) {
     switch (mode) {
       case CutoutMode.trim:
@@ -138,6 +146,7 @@ class CutoutBurstHomeLogic extends GetxController {
         return Colors.grey;
     }
   }
+
   String getModeTag(String mode) {
     switch (mode) {
       case CutoutMode.trim:
@@ -153,6 +162,7 @@ class CutoutBurstHomeLogic extends GetxController {
     }
   }
 }
+
 class _PreviewDialog extends StatelessWidget {
   final CutoutHistory history;
   final VoidCallback onDelete;
@@ -180,29 +190,30 @@ class _PreviewDialog extends StatelessWidget {
                 height: 200,
                 color: Colors.grey,
                 child: const Center(
-                  child: Icon(Icons.broken_image, size: 48, color: Colors.white),
+                  child:
+                  Icon(Icons.broken_image, size: 48, color: Colors.white),
                 ),
               ),
             ),
           ),
         ),
         const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 12,
+          runSpacing: 12,
           children: [
             _ActionButton(
               icon: Icons.share_rounded,
               label: 'Share',
               onTap: onShare,
             ),
-            const SizedBox(width: 20),
             _ActionButton(
               icon: Icons.delete_outline_rounded,
               label: 'Delete',
               onTap: onDelete,
               color: Colors.red,
             ),
-            const SizedBox(width: 20),
             _ActionButton(
               icon: Icons.close_rounded,
               label: 'Close',
@@ -214,6 +225,7 @@ class _PreviewDialog extends StatelessWidget {
     );
   }
 }
+
 class _ActionButton extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -237,7 +249,8 @@ class _ActionButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 20, color: color != null ? Colors.white : Colors.black87),
+            Icon(icon,
+                size: 20, color: color != null ? Colors.white : Colors.black87),
             const SizedBox(width: 6),
             Text(
               label,
