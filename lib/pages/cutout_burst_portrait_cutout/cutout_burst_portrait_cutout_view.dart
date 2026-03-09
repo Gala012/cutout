@@ -18,35 +18,41 @@ class CutoutBurstPortraitCutoutView
         appBar: AppBar(
           title: Text('Portrait Cutout'),
           actions: [
-            Obx(() => GestureDetector(
-                  onTap: controller.isProcessing.value
-                      ? null
-                      : controller.onSaveTap,
-                  child: Container(
-                    margin: EdgeInsets.only(left: 4.w, right: 8.w),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-                    decoration: BoxDecoration(
-                      gradient: controller.isProcessing.value
-                          ? null
-                          : CutoutBurstColors.primaryGradient,
-                      color: controller.isProcessing.value
-                          ? Colors.grey.shade700
-                          : null,
-                      borderRadius: BorderRadius.circular(16.h),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Save',
-                            style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white)),
-                      ],
-                    ),
+            Obx(
+                  () => GestureDetector(
+                onTap:
+                controller.isProcessing.value ? null : controller.onSaveTap,
+                child: Container(
+                  margin: EdgeInsets.only(left: 4.w, right: 8.w),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14.w,
+                    vertical: 6.h,
                   ),
-                )),
+                  decoration: BoxDecoration(
+                    gradient: controller.isProcessing.value
+                        ? null
+                        : CutoutBurstColors.primaryGradient,
+                    color: controller.isProcessing.value
+                        ? Colors.grey.shade700
+                        : null,
+                    borderRadius: BorderRadius.circular(16.h),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Save',
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
         body: SafeArea(
@@ -70,15 +76,21 @@ class CutoutBurstPortraitCutoutView
         children: [
           GestureDetector(
             onTap: controller.onHelpTap,
-            child: Icon(Icons.info_outline_rounded,
-                size: 18.w, color: Colors.white54),
+            child: Icon(
+              Icons.info_outline_rounded,
+              size: 18.w,
+              color: Colors.white54,
+            ),
           ),
           SizedBox(width: 8.w),
-          Text('Background:',
-              style: TextStyle(fontSize: 12.sp, color: Colors.white60)),
+          Text(
+            'Background:',
+            style: TextStyle(fontSize: 12.sp, color: Colors.white60),
+          ),
           SizedBox(width: 10.w),
-          ...CutoutBurstPortraitCutoutLogic.bgColors
-              .map((c) => _buildColorDot(c)),
+          ...CutoutBurstPortraitCutoutLogic.bgColors.map(
+                (c) => _buildColorDot(c),
+          ),
         ],
       ),
     );
@@ -135,13 +147,16 @@ class CutoutBurstPortraitCutoutView
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.person_outlined,
-                        size: 80.w, color: Colors.white24),
+                    Icon(
+                      Icons.person_outlined,
+                      size: 80.w,
+                      color: Colors.white24,
+                    ),
                     SizedBox(height: 12.h),
                     Text(
                       isProcessing
                           ? 'Processing...'
-                          : 'AI processing portrait...',
+                          : 'Processing portrait...',
                       style: TextStyle(fontSize: 12.sp, color: Colors.white38),
                     ),
                   ],
@@ -162,10 +177,7 @@ class CutoutBurstPortraitCutoutView
                       SizedBox(height: 16.h),
                       Text(
                         'AI Processing...',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 14.sp, color: Colors.white),
                       ),
                     ],
                   ),
@@ -181,10 +193,7 @@ class CutoutBurstPortraitCutoutView
 class _PortraitCutoutPainter extends CustomPainter {
   final ui.Image image;
   final Color backgroundColor;
-  _PortraitCutoutPainter({
-    required this.image,
-    required this.backgroundColor,
-  });
+  _PortraitCutoutPainter({required this.image, required this.backgroundColor});
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawRect(
