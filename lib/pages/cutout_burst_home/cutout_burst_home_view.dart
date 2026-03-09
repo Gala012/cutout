@@ -100,41 +100,58 @@ class CutoutBurstHomeView extends GetView<CutoutBurstHomeLogic> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CutoutBurstColors.bg,
-      appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 0, bottom: 16.h),
+      body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 20.h),
-                  _buildWelcomeBanner(),
-                  SizedBox(height: 20.h),
-                  _buildSectionHeader('✦ Cutout Tools'),
-                  SizedBox(height: 12.h),
-                  _buildModeGrid(),
-                  SizedBox(height: 24.h),
-                  _buildSectionHeaderWithAction('✦ Recent Works'),
-                  SizedBox(height: 12.h),
-                ],
+            _buildAppBar(),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(top: 0, bottom: 16.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20.h),
+                          _buildWelcomeBanner(),
+                          SizedBox(height: 20.h),
+                          _buildSectionHeader('✦ Cutout Tools'),
+                          SizedBox(height: 12.h),
+                          _buildModeGrid(),
+                          SizedBox(height: 24.h),
+                          _buildSectionHeaderWithAction('✦ Recent Works'),
+                          SizedBox(height: 12.h),
+                        ],
+                      ),
+                    ),
+                    _buildRecentWorks(),
+                    SizedBox(height: 24.h),
+                  ],
+                ),
               ),
             ),
-            _buildRecentWorks(),
-            SizedBox(height: 24.h),
           ],
         ),
       ),
     );
   }
-  PreferredSizeWidget _buildAppBar() {
-    return AppBar(
-      backgroundColor: CutoutBurstColors.card,
-      automaticallyImplyLeading: false,
-      title: Row(
+  Widget _buildAppBar() {
+    return Container(
+      height: 56.h,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      decoration: BoxDecoration(
+        color: CutoutBurstColors.card,
+        border: Border(
+          bottom: BorderSide(
+            color: CutoutBurstColors.border.withValues(alpha: 0.5),
+            width: 0.5,
+          ),
+        ),
+      ),
+      child: Row(
         children: [
           Container(
             width: 32.w,
